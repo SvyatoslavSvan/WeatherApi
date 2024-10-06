@@ -4,8 +4,8 @@ namespace WeatherForecast.Domain.Interfaces
 {
     public interface IWeatherApiService
     {
-        public Task<TemperatureState> GetTodayTemperatureState(TimeOnly hour, City city);
+        public Task<TemperatureState> GetTodayTemperatureState(TimeOnly hour, string city);
 
-        public TemperatureState GetForecast(Period period, City city);
+        public Task<IList<TemperatureState>> GetForecast(ForecastPeriod forecastPeriod, string cityName);
     }
 }

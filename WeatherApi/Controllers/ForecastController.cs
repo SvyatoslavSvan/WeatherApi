@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WeatherForecast.Domain.Exceptions;
 using WeatherForecast.Domain.Interfaces;
 using WeatherForecast.Domain.Models;
 
@@ -14,14 +15,39 @@ namespace WeatherForecast.Controllers
         {
             _weatherApiService = weatherApiService;
         }
-        [HttpGet("{hour}")]
-        public async Task<IActionResult> GetTodayTemperature(TimeOnly hour)
+
+        [HttpGet("TodayTemperature")]
+        public async Task<IActionResult> TodayTemperature(int hour, string cityName)
         {
-            return Ok(await _weatherApiService.GetTodayTemperatureState(hour, new City()
+            return await ExecuteWithExceptionHandling(async () =>
+                Ok(await _weatherApiService.GetTodayTemperatureState(new TimeOnly(hour, 00), cityName)));
+        }
+
+        [HttpGet("Forecast")]
+        public async Task<IActionResult> Forecast(DateTime from, DateTime to, string cityName)
+        {
+            return await ExecuteWithExceptionHandling(async () =>
+                Ok(await _weatherApiService.GetForecast(new ForecastPeriod(from, to), cityName)));
+        }
+
+        private async Task<IActionResult> ExecuteWithExceptionHandling(Func<Task<IActionResult>> action)
+        {
+            try
             {
-                Latitude = 47.875f,
-                Longitude = 31.0f
-            }));
+                return await action();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (HttpRequestException e)
+            {
+                return StatusCode(500);
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }

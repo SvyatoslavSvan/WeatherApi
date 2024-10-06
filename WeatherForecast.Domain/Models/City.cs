@@ -1,11 +1,13 @@
-﻿namespace WeatherForecast.Domain.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace WeatherForecast.Domain.Models
 {
-    public class City
+    public class City(float latitude, float longitude, string name)
     {
-        public float Latitude { get; set; }
+        public string Name { get; set; } = name;
 
-        public float Longitude { get; set; }
+        public float Latitude { get; set; } = latitude;
 
-        public int Elevation { get; set; }
+        public float Longitude { get; set; } = longitude;
     }
 }
