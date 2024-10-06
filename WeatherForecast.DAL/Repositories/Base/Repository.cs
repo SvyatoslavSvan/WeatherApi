@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using WeatherForecast.Controllers;
 using WeatherForecast.DAL.Interfaces.Base;
+using WeatherForecast.Domain.Models;
 using WeatherForecast.Domain.Models.Base;
 
 namespace WeatherForecast.DAL.Repositories.Base
@@ -17,7 +17,7 @@ namespace WeatherForecast.DAL.Repositories.Base
 
         public Task<T> Create(TemperatureState temperature)
         {
-            
+            throw new NotImplementedException();
         }
 
         public Task<T> Delete(Guid id)

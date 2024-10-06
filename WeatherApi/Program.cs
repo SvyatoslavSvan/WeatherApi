@@ -1,5 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WeatherForecast.Domain.Interfaces;
 using WeatherForecast.Domain.Services;
+using WeatherForecast.DAL.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IWeatherApiService, WeatherApiService>();
-var connectionString = builder.Configuration.GetConnectionString("AppConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

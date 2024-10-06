@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using WeatherForecast.Controllers;
+using WeatherForecast.Domain.Models;
 using WeatherForecast.Domain.Models.Base;
 
 namespace WeatherForecast.DAL.Interfaces.Base

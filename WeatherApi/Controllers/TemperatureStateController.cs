@@ -5,7 +5,7 @@ namespace WeatherForecast.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TemperatureState : ControllerBase
+    public class TemperatureStateController : ControllerBase
     {
 
     }
