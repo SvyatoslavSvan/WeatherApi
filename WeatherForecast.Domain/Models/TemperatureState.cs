@@ -12,8 +12,8 @@ namespace WeatherForecast.Domain.Models
             Temperature = temperature;
         }
 
-        public DateTime Time { get; set; }
+        public DateTime Time { get; init; }
 
-        public float Temperature { get; set; }
+        public float Temperature { get; init; }
     }
 }

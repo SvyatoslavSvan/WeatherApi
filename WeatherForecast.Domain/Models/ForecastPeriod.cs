@@ -1,4 +1,6 @@
-﻿namespace WeatherForecast.Domain.Models
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace WeatherForecast.Domain.Models
 {
     public sealed class ForecastPeriod
     {
@@ -28,7 +30,7 @@
             set
             {
                 if (value < LowerBound)
-                    throw new ArgumentException("Cannot give temperature state lower than 92 days from today");
+                    throw new ArgumentException($"Date 'From' cannot be earlier than {LowerBound.ToShortDateString()}.", nameof(From));
                 _from = value;
             }
         }
@@ -39,7 +41,7 @@
             set
             {
                 if (value > UpperBound)
-                    throw new ArgumentException("Cannot give temperature state upper than 16 days from today");
+                    throw new ArgumentException($"Date 'To' cannot be later than {UpperBound.ToShortDateString()}.", nameof(To));
                 _to = value;
             }
         }

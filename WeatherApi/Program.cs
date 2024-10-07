@@ -18,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnection")));
+builder.Services.AddHttpClient();
 builder.Services.AddScoped<IWeatherApiService, WeatherApiService>();
 builder.Services.AddScoped<IRepository<TemperatureState>, Repository<TemperatureState>>();
 builder.Services.AddScoped<IService<TemperatureState>, Service<TemperatureState>>();

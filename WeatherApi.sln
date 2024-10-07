@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherForecast.DAL", "Weat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{3C8B683E-DF69-4545-B65D-32EDB691654E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherForecast.Domain.Services", "WeatherForecast\WeatherForecast.Domain.Services.csproj", "{F61313C7-D1AB-45F5-825F-52402DD8D576}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherForecast.Domain.Services", "WeatherForecast\WeatherForecast.Domain.Services.csproj", "{F61313C7-D1AB-45F5-825F-52402DD8D576}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{A1670704-6C86-4B9A-9B43-967B486B67A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{802AE5C8-21EF-4588-84DF-B81AF83AE762}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,7 +44,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{D38F0D70-7BEA-480F-AC34-DBDB9717D365} = {A1670704-6C86-4B9A-9B43-967B486B67A9}
 		{4684ED49-FD87-4C3A-930D-C512158648B4} = {3C8B683E-DF69-4545-B65D-32EDB691654E}
+		{95AC3FE7-EE5D-45D5-92C6-B1ABCC72CD24} = {802AE5C8-21EF-4588-84DF-B81AF83AE762}
 		{F61313C7-D1AB-45F5-825F-52402DD8D576} = {3C8B683E-DF69-4545-B65D-32EDB691654E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
