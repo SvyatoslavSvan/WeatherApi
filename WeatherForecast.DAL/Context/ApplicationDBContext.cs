@@ -3,8 +3,12 @@ using WeatherForecast.Domain.Models;
 
 namespace WeatherForecast.DAL.Context
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+    public class ApplicationDbContext : DbContext
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+        }
+
         public DbSet<TemperatureState> Temperatures { get; set; }
     }
 }

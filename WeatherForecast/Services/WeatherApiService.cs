@@ -5,13 +5,13 @@ using System.Web;
 using WeatherForecast.Domain.DTO.Forecast;
 using WeatherForecast.Domain.DTO.SearchCity;
 using WeatherForecast.Domain.Exceptions;
-using WeatherForecast.Domain.Interfaces;
 using WeatherForecast.Domain.Models;
+using WeatherForecast.Domain.Services.Interfaces;
 
 
 namespace WeatherForecast.Domain.Services
 {
-    public class WeatherApiService : IWeatherApiService
+    public sealed class WeatherApiService : IWeatherApiService
     {
         private readonly HttpClient _httpClient = new();
         

@@ -1,6 +1,6 @@
 ﻿using WeatherForecast.Domain.Models;
 
-namespace WeatherForecast.Domain.Interfaces
+namespace WeatherForecast.Domain.Services.Interfaces
 {
     public interface IWeatherApiService
     {

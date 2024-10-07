@@ -1,9 +1,19 @@
-﻿namespace WeatherForecast.Domain.Models
-{
-    public class TemperatureState(DateTime time, float temperature)
-    {
-        public DateTime DateTime { get; set; } = time;
+﻿using System.Text.Json.Serialization;
+using WeatherForecast.Domain.Models.Base;
 
-        public float Temperature { get; set; } = temperature;
+namespace WeatherForecast.Domain.Models
+{
+    public class TemperatureState : Entity
+    {
+        [JsonConstructor]
+        public TemperatureState(DateTime time, float temperature, Guid id = default) : base(id)
+        {
+            Time = time;
+            Temperature = temperature;
+        }
+
+        public DateTime Time { get; set; }
+
+        public float Temperature { get; set; }
     }
 }

@@ -1,8 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using WeatherForecast.Domain.Interfaces;
 using WeatherForecast.Domain.Services;
 using WeatherForecast.DAL.Context;
+using WeatherForecast.DAL.Interfaces.Base;
+using WeatherForecast.DAL.Repositories.Base;
+using WeatherForecast.Domain.Models;
+using WeatherForecast.Domain.Services.Interfaces;
+using WeatherForecast.Domain.Services.Interfaces.Base;
+using WeatherForecast.Domain.Services.Services.Base;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +16,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IWeatherApiService, WeatherApiService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnection")));
+builder.Services.AddScoped<IWeatherApiService, WeatherApiService>();
+builder.Services.AddScoped<IRepository<TemperatureState>, Repository<TemperatureState>>();
+builder.Services.AddScoped<IService<TemperatureState>, Service<TemperatureState>>();
 
 var app = builder.Build();
 

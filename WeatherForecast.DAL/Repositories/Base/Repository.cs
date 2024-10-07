@@ -1,43 +1,46 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using WeatherForecast.DAL.Context;
 using WeatherForecast.DAL.Interfaces.Base;
-using WeatherForecast.Domain.Models;
 using WeatherForecast.Domain.Models.Base;
 
 namespace WeatherForecast.DAL.Repositories.Base
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {
-        private readonly DbContext _dbContext;
+        protected readonly ApplicationDbContext Context;
 
-        public Repository(DbContext dbContext)
+        public Repository(ApplicationDbContext context)
         {
-            _dbContext = dbContext;
+            Context = context;
         }
 
-        public Task<T> Create(TemperatureState temperature)
+
+        public async Task<T> Create(T value)
         {
-            throw new NotImplementedException();
+            await Context.Set<T>().AddAsync(value);
+            await Context.SaveChangesAsync();
+            return value;
         }
 
-        public Task<T> Delete(Guid id)
+        public async Task<Guid> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            await Context.Set<T>().Where(x => x.Id == id).ExecuteDeleteAsync();
+            return id;
         }
 
-        public Task<T> Update(TemperatureState temperature)
+        public async Task<T> Update(T value)
         {
-            throw new NotImplementedException();
+            Context.Set<T>().Update(value);
+            await Context.SaveChangesAsync();
+            return value;
         }
 
-        public Task<T> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<T> GetById(Guid id) => await Context.Set<T>().FirstAsync(x => x.Id == id);
 
-        public Task<T> GetAll(Expression<Func<T, bool>>? predicate = null)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IList<T>> GetAll(Expression<Func<T, bool>>? predicate = null) => predicate == null
+            ? await Context.Set<T>().ToListAsync()
+            : await Context.Set<T>().Where(predicate).ToListAsync();
+
     }
 }
