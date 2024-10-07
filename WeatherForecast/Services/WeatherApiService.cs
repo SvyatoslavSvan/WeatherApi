@@ -49,7 +49,7 @@ namespace WeatherForecast.Domain.Services
             }
 
             var temperature = forecast.Hourly.Temperature_2m[index];
-            return new TemperatureState(new DateTime(DateOnly.FromDateTime(DateTime.Now.Date), hour), temperature);
+            return new TemperatureState(new DateTime(DateOnly.FromDateTime(DateTime.Now.Date), hour), temperature, cityName);
         }
 
         public async Task<IList<TemperatureState>> GetForecast(ForecastPeriod forecastPeriod, string cityName)
@@ -69,7 +69,7 @@ namespace WeatherForecast.Domain.Services
             var forecast = await response.Content.ReadFromJsonAsync<ForecastResponse>()
                            ?? throw new NullReferenceException("Forecast response is null");
 
-            return forecast.Hourly.ToTemperatureStateCollection();
+            return forecast.Hourly.ToTemperatureStateCollection(cityName);
         }
 
         public async Task<IList<City>> GetCitiesByName(string name, int count = 1)

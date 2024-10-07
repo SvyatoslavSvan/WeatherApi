@@ -8,7 +8,7 @@ namespace WeatherForecast.Domain.DTO.Forecast
         // ReSharper disable once InconsistentNaming
         public List<float> Temperature_2m { get; set; } = null!;
 
-        public IList<TemperatureState> ToTemperatureStateCollection()
+        public IList<TemperatureState> ToTemperatureStateCollection(string cityName)
         {
             if (Time.Count != Temperature_2m.Count)
             {
@@ -17,7 +17,7 @@ namespace WeatherForecast.Domain.DTO.Forecast
             var temperatureStates = new List<TemperatureState>();
             for (int i = 0; i < Time.Count; i++)
             {
-                temperatureStates.Add(new TemperatureState(Time[i], Temperature_2m[i]));
+                temperatureStates.Add(new TemperatureState(Time[i], Temperature_2m[i], cityName));
             }
             return temperatureStates;
         }
