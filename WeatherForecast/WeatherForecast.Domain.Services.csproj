@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LinqKit" Version="1.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WeatherForecast.DAL\WeatherForecast.DAL.csproj" />
     <ProjectReference Include="..\WeatherForecast.Domain\WeatherForecast.Domain.csproj" />
   </ItemGroup>

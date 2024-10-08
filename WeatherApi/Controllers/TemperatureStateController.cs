@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WeatherForecast.Controllers.Base;
 using WeatherForecast.Domain.Models;
-using WeatherForecast.Domain.Services.Interfaces.Base;
+using WeatherForecast.Domain.SearchRequest;
+using WeatherForecast.Domain.Services;
+using WeatherForecast.Domain.Services.Interfaces;
 
 namespace WeatherForecast.Controllers
 {
@@ -9,9 +11,16 @@ namespace WeatherForecast.Controllers
     [ApiController]
     public class TemperatureStateController : EntityController<TemperatureState>
     {
-        public TemperatureStateController(IService<TemperatureState> service) : base(service)
+        private readonly ITemperatureStateService _service;
+
+        public TemperatureStateController(ITemperatureStateService service) : base(service)
         {
+            _service = service;
         }
+        [HttpGet("search")]
+        public async Task<IActionResult> GetSearch([FromQuery]TemperatureStateSearchRequest request) =>
+            await ExecuteWithExceptionHandling(async () =>
+                Ok(await _service.GetBySearchRequest(request)));
 
     }
 }

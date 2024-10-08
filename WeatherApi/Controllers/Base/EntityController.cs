@@ -6,36 +6,36 @@ namespace WeatherForecast.Controllers.Base
 {
     public abstract class EntityController<T> : ExceptionHandlingController where T : Entity
     {
-        protected readonly IService<T> Service;
+        private readonly IService<T> _service;
 
         protected EntityController(IService<T> service)
         {
-            Service = service;
+            _service = service;
         }
 
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id) =>
             await ExecuteWithExceptionHandling(async () =>
-                Ok(await Service.GetById(id)));
+                Ok(await _service.GetById(id)));
 
         [HttpGet]
         public async Task<IActionResult> GetAll() =>
             await ExecuteWithExceptionHandling(async () =>
-                Ok(await Service.GetAll()));
+                Ok(await _service.GetAll()));
 
         [HttpPost("Create")]
         public async Task<IActionResult> Create(T value) =>
             await ExecuteWithExceptionHandling(async () =>
-                Ok(await Service.Create(value)));
+                Ok(await _service.Create(value)));
 
         [HttpPut]
         public async Task<IActionResult> Update(T value) =>
             await ExecuteWithExceptionHandling(async () =>
-                Ok(await Service.Update(value)));
+                Ok(await _service.Update(value)));
 
         [HttpPost("Delete/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id) =>
             await ExecuteWithExceptionHandling(async () =>
-                Ok(await Service.Delete(id)));
+                Ok(await _service.Delete(id)));
     }
 }
