@@ -1,6 +1,4 @@
-﻿using WeatherForecast.Domain.Models;
-
-namespace WeatherForecast.Domain.DTO.SearchCity
+﻿namespace WeatherForecast.Domain.DTO.SearchCity
 {
     public sealed class CityRequest
     {

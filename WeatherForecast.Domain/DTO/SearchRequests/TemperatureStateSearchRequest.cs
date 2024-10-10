@@ -1,4 +1,4 @@
-﻿namespace WeatherForecast.Domain.SearchRequest
+﻿namespace WeatherForecast.Domain.DTO.SearchRequest
 {
     public class TemperatureStateSearchRequest
     {

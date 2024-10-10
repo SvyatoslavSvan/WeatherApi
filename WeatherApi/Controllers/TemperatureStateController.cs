@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WeatherForecast.Controllers.Base;
+using WeatherForecast.Domain.DTO.SearchRequest;
 using WeatherForecast.Domain.Models;
-using WeatherForecast.Domain.SearchRequest;
 using WeatherForecast.Domain.Services;
 using WeatherForecast.Domain.Services.Interfaces;
 

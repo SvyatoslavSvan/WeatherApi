@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace WeatherForecast.Domain.Models
+﻿namespace WeatherForecast.Domain.Models
 {
     public sealed class ForecastPeriod
     {

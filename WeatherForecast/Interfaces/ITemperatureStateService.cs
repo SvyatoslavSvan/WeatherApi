@@ -1,5 +1,5 @@
-﻿using WeatherForecast.Domain.Models;
-using WeatherForecast.Domain.SearchRequest;
+﻿using WeatherForecast.Domain.DTO.SearchRequest;
+using WeatherForecast.Domain.Models;
 using WeatherForecast.Domain.Services.Interfaces.Base;
 
 namespace WeatherForecast.Domain.Services.Interfaces

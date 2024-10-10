@@ -1,7 +1,7 @@
 ﻿using LinqKit;
 using WeatherForecast.DAL.Interfaces.Base;
+using WeatherForecast.Domain.DTO.SearchRequest;
 using WeatherForecast.Domain.Models;
-using WeatherForecast.Domain.SearchRequest;
 using WeatherForecast.Domain.Services.Interfaces;
 using WeatherForecast.Domain.Services.Services.Base;
 
