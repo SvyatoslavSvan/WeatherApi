@@ -1,4 +1,6 @@
-﻿namespace WeatherForecast.Domain.DTO.SearchCity
+﻿using WeatherForecast.DTO.Forecast;
+
+namespace WeatherForecast.DTO.SearchCity
 {
     public sealed class CityRequest
     {
@@ -9,7 +11,7 @@
             var cities = new List<City>();
             foreach (var result in Results)
             {
-                cities.Add(new City(result.Latitude, result.Longitude, result.Name)); 
+                cities.Add(new City(result.Latitude, result.Longitude, result.Name));
             }
             return cities;
         }

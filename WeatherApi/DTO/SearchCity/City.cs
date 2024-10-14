@@ -1,4 +1,4 @@
-﻿namespace WeatherForecast.Domain.DTO.SearchCity
+﻿namespace WeatherForecast.DTO.SearchCity
 {
     public class City
     {

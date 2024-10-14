@@ -1,4 +1,4 @@
-﻿namespace WeatherForecast.Domain.DTO.Forecast
+﻿namespace WeatherForecast.DTO.Forecast
 {
     public sealed class ForecastResponse
     {

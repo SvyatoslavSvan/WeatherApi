@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WeatherForecast.Controllers.Base;
-using WeatherForecast.Domain.Exceptions;
 using WeatherForecast.Domain.Services.Interfaces;
-using WeatherForecast.Domain.Models;
+using WeatherForecast.DTO.Forecast;
 
 namespace WeatherForecast.Controllers
 {
@@ -25,7 +24,7 @@ namespace WeatherForecast.Controllers
         [HttpGet("Forecast")]
         public async Task<IActionResult> Forecast(DateTime from, DateTime to, string cityName) =>
             await ExecuteWithExceptionHandling(async () =>
-                Ok(await _weatherApiService.GetForecast(new ForecastPeriod(from, to), cityName)));
+                Ok(await _weatherApiService.GetForecast(new Period(from, to), cityName)));
 
     }
 }

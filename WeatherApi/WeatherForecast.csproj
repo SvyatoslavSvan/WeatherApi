@@ -15,10 +15,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\WeatherForecast.DAL\WeatherForecast.DAL.csproj" />
-    <ProjectReference Include="..\WeatherForecast.Domain\WeatherForecast.Domain.csproj" />
-    <ProjectReference Include="..\WeatherForecast\WeatherForecast.Domain.Services.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -1,12 +1,10 @@
 ﻿using System.Globalization;
 using System.Net;
-using System.Net.Http.Json;
 using System.Web;
-using WeatherForecast.Domain.DTO.Forecast;
-using WeatherForecast.Domain.DTO.SearchCity;
-using WeatherForecast.Domain.Exceptions;
-using WeatherForecast.Domain.Models;
 using WeatherForecast.Domain.Services.Interfaces;
+using WeatherForecast.DTO.Forecast;
+using WeatherForecast.DTO.SearchCity;
+using WeatherForecast.Exception;
 
 
 namespace WeatherForecast.Domain.Services
@@ -20,7 +18,7 @@ namespace WeatherForecast.Domain.Services
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
-        public async Task<TemperatureState> GetTodayTemperatureState(TimeOnly hour, string cityName)
+        public async Task<Hourly> GetTodayTemperatureState(TimeOnly hour, string cityName)
         {
             UriBuilder builder = new()
             {
@@ -41,18 +39,10 @@ namespace WeatherForecast.Domain.Services
                 throw new NullReferenceException("Forecast response is null");
             }
 
-            var index = forecast.Hourly.Time.FindIndex(x => x.TimeOfDay.Hours == hour.ToTimeSpan().Hours);
-
-            if (index == -1)
-            {
-                throw new IndexOutOfRangeException("The specified hour was not found in the forecast.");
-            }
-
-            var temperature = forecast.Hourly.Temperature_2m[index];
-            return new TemperatureState(new DateTime(DateOnly.FromDateTime(DateTime.Now.Date), hour), temperature, cityName);
+            return forecast.Hourly;
         }
 
-        public async Task<IList<TemperatureState>> GetForecast(ForecastPeriod forecastPeriod, string cityName)
+        public async Task<Hourly> GetForecast(Period forecastPeriod, string cityName)
         {
             UriBuilder builder = new()
             {
@@ -69,7 +59,7 @@ namespace WeatherForecast.Domain.Services
             var forecast = await response.Content.ReadFromJsonAsync<ForecastResponse>()
                            ?? throw new NullReferenceException("Forecast response is null");
 
-            return forecast.Hourly.ToTemperatureStateCollection(cityName);
+            return forecast.Hourly;
         }
 
         public async Task<IList<City>> GetCitiesByName(string name, int count = 1)
@@ -120,7 +110,7 @@ namespace WeatherForecast.Domain.Services
             builder.Query = query.ToString();
         }
 
-        private void CreateForecastRequest(ForecastPeriod forecastPeriod, City city, UriBuilder builder)
+        private void CreateForecastRequest(Period forecastPeriod, City city, UriBuilder builder)
         {
             var query = HttpUtility.ParseQueryString(string.Empty);
             query[nameof(city.Latitude).ToLower()] = city.Latitude.ToString(CultureInfo.InvariantCulture);

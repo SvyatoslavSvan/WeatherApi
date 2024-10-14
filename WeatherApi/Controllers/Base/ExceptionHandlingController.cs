@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WeatherForecast.Domain.Exceptions;
+using WeatherForecast.Exception;
 
 namespace WeatherForecast.Controllers.Base
 {
