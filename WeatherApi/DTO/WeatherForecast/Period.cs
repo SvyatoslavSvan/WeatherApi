@@ -1,4 +1,4 @@
-﻿namespace WeatherForecast.DTO.Forecast
+﻿namespace WeatherForecast.DTO.WeatherForecast
 {
     public class Period(DateTime from, DateTime to)
     {

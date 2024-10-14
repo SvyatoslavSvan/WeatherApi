@@ -1,6 +1,4 @@
-﻿using WeatherForecast.DTO.Forecast;
-
-namespace WeatherForecast.DTO.SearchCity
+﻿namespace WeatherForecast.DTO.SearchCity
 {
     public sealed class CityRequest
     {

@@ -17,7 +17,7 @@ namespace WeatherForecast.Controllers.Base
             }
             catch (HttpRequestException e)
             {
-                return StatusCode(500);
+                return StatusCode(500, e.Message);
             }
             catch (NotFoundException)
             {

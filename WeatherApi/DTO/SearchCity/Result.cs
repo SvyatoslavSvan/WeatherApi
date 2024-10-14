@@ -1,4 +1,4 @@
-﻿namespace WeatherForecast.DTO.Forecast
+﻿namespace WeatherForecast.DTO.SearchCity
 {
     public sealed class Result
     {
