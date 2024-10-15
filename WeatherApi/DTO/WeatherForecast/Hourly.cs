@@ -1,7 +1,7 @@
 ﻿
 namespace WeatherForecast.DTO.WeatherForecast
 {
-    public sealed class Hourly
+    public class Hourly
     {
         public List<DateTime> Time { get; set; } = null!;
         // ReSharper disable once InconsistentNaming

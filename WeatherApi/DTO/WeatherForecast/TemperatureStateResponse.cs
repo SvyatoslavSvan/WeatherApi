@@ -1,6 +1,6 @@
 ﻿namespace WeatherForecast.DTO.WeatherForecast
 {
-    public sealed class ForecastResponse
+    public class TemperatureStateResponse
     {
         public Hourly Hourly { get; set; } = null!;
     }

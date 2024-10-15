@@ -26,7 +26,7 @@ namespace WeatherForecast.Services.Implementations.Forecast
             });
             var response = await _httpClient.GetAsync(builder.Uri);
             ProceedResponse(response);
-            var forecast = await response.Content.ReadFromJsonAsync<ForecastResponse>();
+            var forecast = await response.Content.ReadFromJsonAsync<TemperatureStateResponse>();
             if (forecast is null) throw new NullReferenceException("Forecast response is null");
             var index = forecast.Hourly.Time.FindIndex(x => x.TimeOfDay.Hours == hour.ToTimeSpan().Hours);
             if (index == -1) throw new IndexOutOfRangeException("The specified hour was not found in the forecast.");
@@ -44,7 +44,7 @@ namespace WeatherForecast.Services.Implementations.Forecast
             }, forecastPeriod);
             var response = await _httpClient.GetAsync(builder.Uri);
             ProceedResponse(response);
-            var forecast = await response.Content.ReadFromJsonAsync<ForecastResponse>() ??
+            var forecast = await response.Content.ReadFromJsonAsync<TemperatureStateResponse>() ??
                            throw new NullReferenceException("Forecast response is null");
             return forecast.Hourly.ToTemperatureStateCollection(cityName);
         }

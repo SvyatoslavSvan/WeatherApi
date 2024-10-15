@@ -1,23 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WeatherForecast.Controllers.Base;
 using WeatherForecast.Domain.Services.Interfaces;
 using WeatherForecast.DTO.WeatherForecast;
 
-namespace WeatherForecast.Controllers
+namespace WeatherForecast.Controllers.Base
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ForecastController : ExceptionHandlingController
+    public abstract class ForecastController<T> : ExceptionHandlingController
     {
-        private readonly IForecastApiService<TemperatureState> _forecastApiService;
+        private readonly IForecastApiService<T> _forecastApiService;
 
-        public ForecastController(IForecastApiService<TemperatureState> forecastApiService)
+        private protected ForecastController(IForecastApiService<T> forecastApiService)
         {
             _forecastApiService = forecastApiService;
         }
 
-        [HttpGet("TodayTemperature")]
-        public async Task<IActionResult> TodayTemperature(int hour, string cityName) =>
+        [HttpGet("TodayForecast")]
+        public async Task<IActionResult> TodayForecast(int hour, string cityName) =>
             await ExecuteWithExceptionHandling(async () =>
                 Ok(await _forecastApiService.GetTodayForecast(new TimeOnly(hour, 00), cityName)));
 
@@ -26,5 +23,6 @@ namespace WeatherForecast.Controllers
             await ExecuteWithExceptionHandling(async () =>
                 Ok(await _forecastApiService.GetForecast(new Period(from, to), cityName)));
 
+        
     }
 }

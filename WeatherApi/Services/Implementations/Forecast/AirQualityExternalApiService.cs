@@ -9,7 +9,7 @@ namespace WeatherForecast.Services.Implementations.Forecast
 {
     public sealed class AirQualityExternalApiService : ForecastService, IForecastApiService<AirQuality>
     {
-        private const string? hourlyParameters = "european_aqi_pm2_5,european_aqi_pm10,european_aqi_nitrogen_dioxide,european_aqi_ozone,european_aqi_sulphur_dioxide";
+        private const string HourlyParameters = "european_aqi_pm2_5,european_aqi_pm10,european_aqi_nitrogen_dioxide,european_aqi_ozone,european_aqi_sulphur_dioxide";
 
         public AirQualityExternalApiService(HttpClient httpClient, IGeoCodingApiService geoCodingApiService) : base(httpClient, geoCodingApiService)
         {
@@ -21,17 +21,17 @@ namespace WeatherForecast.Services.Implementations.Forecast
             var city = (await _geoCodingService.GetCitiesByName(cityName)).First();
             CreateRequest(city, builder, collection =>
             {
-                collection["hourly"] = hourlyParameters;
-            });
+                collection["hourly"] = HourlyParameters;
+            }, isToday: true);
             var response = await _httpClient.GetAsync(builder.Uri);
             ProceedResponse(response);
-            var hourly = await response.Content.ReadFromJsonAsync<Hourly>();
-            if (hourly is null)
+            var airQualityResponse = await response.Content.ReadFromJsonAsync<AirQualityResponse>();
+            if (airQualityResponse is null) 
                 throw new NullReferenceException("Forecast response is null");
-            var index = hourly.time.FindIndex(x => x.TimeOfDay.Hours == hour.ToTimeSpan().Hours);
+            var index = airQualityResponse.Hourly.time.FindIndex(x => x.TimeOfDay.Hours == hour.ToTimeSpan().Hours);
             if (index == -1)
                 throw new IndexOutOfRangeException("The specified hour was not found in the forecast.");
-            return hourly.CreateAirQuality(cityName, index);
+            return airQualityResponse.Hourly.CreateAirQuality(cityName, index);
         }
 
         public async Task<IList<AirQuality>> GetForecast(Period forecastPeriod, string cityName)
@@ -40,13 +40,13 @@ namespace WeatherForecast.Services.Implementations.Forecast
             var city = (await _geoCodingService.GetCitiesByName(cityName)).First();
             CreateRequest(city, builder, collection =>
             {
-                collection["hourly"] = hourlyParameters;
+                collection["hourly"] = HourlyParameters;
             }, forecastPeriod);
             var response = await _httpClient.GetAsync(builder.Uri);
             ProceedResponse(response);
-            var hourly = await response.Content.ReadFromJsonAsync<Hourly>() ??
+            var airQualityResponse = await response.Content.ReadFromJsonAsync<AirQualityResponse>() ??
                            throw new NullReferenceException("Forecast response is null");
-            return hourly.ToAirQualityCollection(cityName);
+            return airQualityResponse.Hourly.ToAirQualityCollection(cityName);
         }
 
         private static UriBuilder GetUriBuilder()

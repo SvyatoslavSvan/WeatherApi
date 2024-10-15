@@ -1,6 +1,6 @@
 ﻿namespace WeatherForecast.DTO.SearchCity
 {
-    public sealed class CityRequest
+    public class CityRequest
     {
         public required IList<Result> Results { get; set; }
 

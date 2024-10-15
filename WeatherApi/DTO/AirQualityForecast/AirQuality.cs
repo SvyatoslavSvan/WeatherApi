@@ -2,6 +2,7 @@
 {
     public class AirQuality
     {
+
         public AirQuality(DateTime time, int europeanAirQualityPm10, int europeanAirQualityPm25,
             int europeanAirQualityNitrogenDioxide, int europeanAirQualityOzone, int europeanAirQualitySulphurDioxide, string cityName)
         {

@@ -23,6 +23,10 @@ namespace WeatherForecast.Controllers.Base
             {
                 return NotFound();
             }
+            catch (System.Exception e)
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

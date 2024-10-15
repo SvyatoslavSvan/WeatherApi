@@ -1,6 +1,6 @@
 ﻿namespace WeatherForecast.DTO.SearchCity
 {
-    public sealed class Result
+    public class Result
     {
         public string Name { get; set; } = null!;
         public float Latitude { get; set; }

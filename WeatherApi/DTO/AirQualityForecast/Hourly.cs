@@ -1,22 +1,24 @@
 ﻿// ReSharper disable InconsistentNaming
 
+using System.Text.Json.Serialization;
+
 namespace WeatherForecast.DTO.AirQualityForecast
 {
     public class Hourly
     {
-        public Hourly(IList<DateTime> time,
-            IList<float> pm10,
-            IList<float> pm25,
-            IList<float> carbonMonoxide,
-            IList<float> nitrogenDioxide,
-            IList<float> ozone, List<DateTime> time1, List<int> europeanAqiPm10, List<int> europeanAqiPm25, List<int> europeanAqiNitrogenDioxide, List<int> europeanAqiOzone, List<int> europeanAqiSulphurDioxide)
+        public Hourly()
         {
-            this.time = time1;
-            european_aqi_pm10 = europeanAqiPm10;
-            european_aqi_pm2_5 = europeanAqiPm25;
-            european_aqi_nitrogen_dioxide = europeanAqiNitrogenDioxide;
-            european_aqi_ozone = europeanAqiOzone;
-            european_aqi_sulphur_dioxide = europeanAqiSulphurDioxide;
+            
+        }
+
+        public Hourly(List<DateTime> time, List<int> european_aqi_pm10, List<int> european_aqi_pm2_5, List<int> european_aqi_nitrogen_dioxide, List<int> european_aqi_ozone, List<int> european_aqi_sulphur_dioxide)
+        {
+            this.time = time;
+            this.european_aqi_pm10 = european_aqi_pm10;
+            this.european_aqi_pm2_5 = european_aqi_pm2_5;
+            this.european_aqi_nitrogen_dioxide = european_aqi_nitrogen_dioxide;
+            this.european_aqi_ozone = european_aqi_ozone;
+            this.european_aqi_sulphur_dioxide = european_aqi_sulphur_dioxide;
         }
 
         public List<DateTime> time { get; set; }
